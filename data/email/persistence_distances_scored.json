@@ -1,0 +1,515 @@
+{
+  "adjacency_path": "data/email/monthly_adjacency_lists.pkl",
+  "scores_path": "data/email/monthly_global_edge_scores.pkl",
+  "score_threshold": 0.8,
+  "sample_size": 100,
+  "sample_selector": "id",
+  "available_graph_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    26
+  ],
+  "target_pairs": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      6
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      11,
+      12
+    ],
+    [
+      12,
+      13
+    ],
+    [
+      13,
+      14
+    ],
+    [
+      14,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      16,
+      17
+    ]
+  ],
+  "homology_dims": [
+    0,
+    1
+  ],
+  "max_dimension": 2,
+  "results": [
+    {
+      "pair": [
+        0,
+        1
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 59,
+        "kept_edges": 21
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 76,
+        "kept_edges": 43
+      },
+      "wasserstein_by_dim": {
+        "0": 2.1508252475073313,
+        "1": 0.26516504294495535
+      },
+      "bottleneck_by_dim": {
+        "0": 0.07500000298023224,
+        "1": 0.0625
+      }
+    },
+    {
+      "pair": [
+        1,
+        2
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 76,
+        "kept_edges": 43
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 61,
+        "kept_edges": 17
+      },
+      "wasserstein_by_dim": {
+        "0": 1.9710453067540932,
+        "1": 0.26516504294495535
+      },
+      "bottleneck_by_dim": {
+        "0": 0.0625,
+        "1": 0.0625
+      }
+    },
+    {
+      "pair": [
+        2,
+        3
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 61,
+        "kept_edges": 17
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 79,
+        "kept_edges": 39
+      },
+      "wasserstein_by_dim": {
+        "0": 1.5808802823259267,
+        "1": 0.2020305179419097
+      },
+      "bottleneck_by_dim": {
+        "0": 0.0714285746216774,
+        "1": 0.0714285746216774
+      }
+    },
+    {
+      "pair": [
+        3,
+        4
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 79,
+        "kept_edges": 39
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 77,
+        "kept_edges": 32
+      },
+      "wasserstein_by_dim": {
+        "0": 0.8739487924760512,
+        "1": 0.2020305179419097
+      },
+      "bottleneck_by_dim": {
+        "0": 0.0714285746216774,
+        "1": 0.0714285746216774
+      }
+    },
+    {
+      "pair": [
+        4,
+        5
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 77,
+        "kept_edges": 32
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 77,
+        "kept_edges": 26
+      },
+      "wasserstein_by_dim": {
+        "0": 0.8586084545787962,
+        "1": 0.0
+      },
+      "bottleneck_by_dim": {
+        "0": 0.0625,
+        "1": 0.0
+      }
+    },
+    {
+      "pair": [
+        5,
+        6
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 77,
+        "kept_edges": 26
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 75,
+        "kept_edges": 18
+      },
+      "wasserstein_by_dim": {
+        "0": 0.9368866996939431,
+        "1": 0.0
+      },
+      "bottleneck_by_dim": {
+        "0": 0.0833333358168602,
+        "1": 0.0
+      }
+    },
+    {
+      "pair": [
+        6,
+        7
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 75,
+        "kept_edges": 18
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 104,
+        "kept_edges": 35
+      },
+      "wasserstein_by_dim": {
+        "0": 0.3535533905932738,
+        "1": 0.0
+      },
+      "bottleneck_by_dim": {
+        "0": 0.125,
+        "1": 0.0
+      }
+    },
+    {
+      "pair": [
+        7,
+        8
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 104,
+        "kept_edges": 35
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 83,
+        "kept_edges": 35
+      },
+      "wasserstein_by_dim": {
+        "0": 2.2774840234322196,
+        "1": 0.2020305074051976
+      },
+      "bottleneck_by_dim": {
+        "0": 0.1071428507566452,
+        "1": 0.1428571417927742
+      }
+    },
+    {
+      "pair": [
+        8,
+        9
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 83,
+        "kept_edges": 35
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 58,
+        "kept_edges": 22
+      },
+      "wasserstein_by_dim": {
+        "0": 1.2244383806298063,
+        "1": 0.2020305074051976
+      },
+      "bottleneck_by_dim": {
+        "0": 0.0714285746216774,
+        "1": 0.1428571417927742
+      }
+    },
+    {
+      "pair": [
+        9,
+        10
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 58,
+        "kept_edges": 22
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 78,
+        "kept_edges": 41
+      },
+      "wasserstein_by_dim": {
+        "0": 1.6195857404426335,
+        "1": 0.11785112844163925
+      },
+      "bottleneck_by_dim": {
+        "0": 0.0416666679084301,
+        "1": 0.0833333320915699
+      }
+    },
+    {
+      "pair": [
+        10,
+        11
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 78,
+        "kept_edges": 41
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 78,
+        "kept_edges": 33
+      },
+      "wasserstein_by_dim": {
+        "0": 1.8374610107918723,
+        "1": 0.06941610390413687
+      },
+      "bottleneck_by_dim": {
+        "0": 0.0595238134264946,
+        "1": 0.0595238134264946
+      }
+    },
+    {
+      "pair": [
+        11,
+        12
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 78,
+        "kept_edges": 33
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 80,
+        "kept_edges": 26
+      },
+      "wasserstein_by_dim": {
+        "0": 1.5111678248386458,
+        "1": 0.10101525897095485
+      },
+      "bottleneck_by_dim": {
+        "0": 0.0714285746216774,
+        "1": 0.0714285746216774
+      }
+    },
+    {
+      "pair": [
+        12,
+        13
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 80,
+        "kept_edges": 26
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 40,
+        "kept_edges": 13
+      },
+      "wasserstein_by_dim": {
+        "0": 1.4656854244379112,
+        "1": 0.0
+      },
+      "bottleneck_by_dim": {
+        "0": 0.25,
+        "1": 0.0
+      }
+    },
+    {
+      "pair": [
+        13,
+        14
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 40,
+        "kept_edges": 13
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 82,
+        "kept_edges": 49
+      },
+      "wasserstein_by_dim": {
+        "0": 3.0917337316890325,
+        "1": 0.30304577691286455
+      },
+      "bottleneck_by_dim": {
+        "0": 0.25,
+        "1": 0.0714285746216774
+      }
+    },
+    {
+      "pair": [
+        14,
+        15
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 82,
+        "kept_edges": 49
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 87,
+        "kept_edges": 31
+      },
+      "wasserstein_by_dim": {
+        "0": 1.47408785394548,
+        "1": 0.25527022851857045
+      },
+      "bottleneck_by_dim": {
+        "0": 0.0714285746216774,
+        "1": 0.0714285746216774
+      }
+    },
+    {
+      "pair": [
+        15,
+        16
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 87,
+        "kept_edges": 31
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 82,
+        "kept_edges": 43
+      },
+      "wasserstein_by_dim": {
+        "0": 1.4753527845317638,
+        "1": 0.11785113370999532
+      },
+      "bottleneck_by_dim": {
+        "0": 0.055555559694767,
+        "1": 0.0833333358168602
+      }
+    },
+    {
+      "pair": [
+        16,
+        17
+      ],
+      "subgraph_a": {
+        "sampled_nodes": 100,
+        "sampled_edges": 82,
+        "kept_edges": 43
+      },
+      "subgraph_b": {
+        "sampled_nodes": 100,
+        "sampled_edges": 64,
+        "kept_edges": 15
+      },
+      "wasserstein_by_dim": {
+        "0": 2.159447687612481,
+        "1": 0.0
+      },
+      "bottleneck_by_dim": {
+        "0": 0.1666666716337204,
+        "1": 0.0
+      }
+    }
+  ],
+  "skipped_non_consecutive_pairs": [],
+  "skipped_missing_pairs": []
+}

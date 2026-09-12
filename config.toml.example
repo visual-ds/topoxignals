@@ -1,0 +1,17 @@
+[paths]
+# Paths are relative to dataset_root.
+dataset_root = "data"
+dataset_file = "email/monthly_adjacency_lists.pkl"
+output_file = "email/persistence_distances.json"
+
+[viewer]
+# Dataset loaded when no selection is supplied to the API: toy | email | hsnet.
+default_dataset = "hsnet"
+
+[edge_scores]
+scores_file = "email/monthly_global_edge_scores.pkl"
+output_file = "email/persistence_distances_scored.json"
+score_threshold = 0.8
+sample_size = 100 # set null to use all nodes from each snapshot
+sample_selector = "id" # id | degree | random
+random_state = 0

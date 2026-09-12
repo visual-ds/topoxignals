@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temporal Graph Viewer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    /* Tooltip style */
+    .tooltip {
+      position: absolute;
+      text-align: left;
+      padding: 8px;
+      font: 12px sans-serif;
+      background: #1e293b;
+      color: #f8fafc;
+      border: 0px;
+      border-radius: 4px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 50;
+    }
+
+    /* Y-axis interaction style */
+    .y-axis text,
+    .y-axis path,
+    .y-axis line {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .y-axis:hover text,
+    .y-axis:hover path,
+    .y-axis:hover line {
+      stroke: #3b82f6;
+      fill: #3b82f6;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-100 text-slate-800 h-screen w-screen overflow-hidden flex flex-col font-sans">
+
+  <!-- Top Bar -->
+  <header class="bg-white shadow-sm border-b border-slate-200 p-4 flex justify-between items-center z-10 shrink-0">
+    <h1 class="text-xl font-bold text-slate-900">Temporal TDA Viewer</h1>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 overflow-hidden p-4">
+    <!-- Grid Layout: 50% Left | 50% Right -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 h-full gap-2">
+
+      <!-- Left Column: Timelines -->
+      <div class="flex flex-col gap-2 h-full min-h-0">
+
+        <!-- Sub Top Bar Left -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-2 flex justify-between items-center shrink-0">
+          <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2">
+              <label for="dataset-select" class="text-sm font-medium text-slate-700">Dataset:</label>
+              <select id="dataset-select" class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg p-1.5 focus:ring-blue-500 focus:border-blue-500">
+                <option value="toy">Toy graph</option>
+                <option value="email">Email network</option>
+                <option value="hsnet" selected>HSNet contact network</option>
+              </select>
+            </div>
+            <div class="flex items-center space-x-2">
+              <label for="dim-select" class="text-sm font-medium text-slate-700">Dim:</label>
+              <select id="dim-select" class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg p-1.5 focus:ring-blue-500 focus:border-blue-500">
+                <option value="0" selected>0</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+            <div class="flex items-center space-x-2">
+              <label for="metric-select" class="text-sm font-medium text-slate-700">Metric:</label>
+              <select id="metric-select" class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg p-1.5 focus:ring-blue-500 focus:border-blue-500">
+                <option value="bottleneck" selected>bottleneck</option>
+                <option value="wasserstein">wasserstein</option>
+              </select>
+            </div>
+            <div class="flex items-center space-x-2">
+              <label for="series-select" class="text-sm font-medium text-slate-700">View:</label>
+              <select id="series-select" class="bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-lg p-1.5 focus:ring-blue-500 focus:border-blue-500">
+                <option value="topology" selected>TC + TS</option>
+                <option value="jaccard">Jaccard baseline</option>
+              </select>
+            </div>
+            <button id="load-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg text-sm px-3 py-1.5">LOAD</button>
+          </div>
+        </div>
+
+        <!-- Raw Timeline (Row 1) -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 flex flex-col flex-1 min-h-0 relative lg:h-1/2">
+          <div class="p-3 border-b border-slate-100 flex items-center shrink-0">
+            <h2 id="raw-timeline-title" class="text-sm font-semibold text-slate-800">Topological Consistency — TC(t)</h2>
+          </div>
+          <div class="flex-1 relative w-full h-full min-h-0 p-2" id="raw-timeline-container">
+            <!-- D3 SVG will be injected here -->
+          </div>
+        </div>
+
+        <!-- Explanation Timeline (Row 2) -->
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200 flex flex-col flex-1 min-h-0 relative lg:h-1/2">
+          <div class="p-3 border-b border-slate-100 flex items-center shrink-0">
+            <h2 id="expl-timeline-title" class="text-sm font-semibold text-slate-800">Topological Stability — TS(t)</h2>
+          </div>
+          <div class="flex-1 relative w-full h-full min-h-0 p-2" id="expl-timeline-container">
+            <!-- D3 SVG will be injected here -->
+          </div>
+        </div>
+
+      </div>
+      <!-- Right Column: Graphs -->
+      <div class="flex flex-col gap-2 h-full min-h-0">
+
+        <!-- Sub Top Bar Right -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-2 flex justify-between items-center shrink-0">
+          <h2 class="text-sm font-semibold text-slate-800">Graphs</h2>
+          <div class="relative group">
+             <button class="bg-slate-100 hover:bg-slate-200 px-3 py-1 rounded text-sm text-slate-700 border border-slate-300">Legend</button>
+             <div id="graph-legend" class="absolute right-0 top-full mt-1 bg-white border border-slate-200 shadow-lg rounded p-2 hidden group-hover:flex flex-col gap-2 text-xs min-w-max z-50"></div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 grid-rows-2 gap-2 h-full min-h-0">
+
+          <!-- Selected Graph (Top Row) -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 flex flex-col min-h-0 relative">
+            <div class="p-3 border-b border-slate-100 flex items-center shrink-0">
+              <h2 id="title-graph-curr" class="text-sm font-semibold text-slate-800">Graph t</h2>
+            </div>
+            <div class="flex-1 relative w-full h-full min-h-0 p-2" id="graph-curr-container">
+              <!-- D3 SVG will be injected here -->
+            </div>
+          </div>
+
+          <!-- Top Right: Next -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 flex flex-col min-h-0 relative">
+            <div class="p-3 border-b border-slate-100 flex items-center shrink-0">
+              <h2 id="title-graph-next" class="text-sm font-semibold text-slate-800">Graph t+1</h2>
+            </div>
+            <div class="flex-1 relative w-full h-full min-h-0 p-2" id="graph-next-container">
+              <!-- D3 SVG will be injected here -->
+            </div>
+          </div>
+
+          <!-- Bottom Left: Curr (Filtered) -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 flex flex-col min-h-0 relative">
+            <div class="p-3 border-b border-slate-100 flex items-center shrink-0">
+              <h2 id="title-graph-curr-filtered" class="text-sm font-semibold text-slate-800">Graph t (Explanation)</h2>
+            </div>
+            <div class="flex-1 relative w-full h-full min-h-0 p-2" id="graph-curr-filtered-container">
+              <!-- D3 SVG will be injected here -->
+            </div>
+          </div>
+
+          <!-- Bottom Right: Next (Filtered) -->
+          <div class="bg-white rounded-xl shadow-sm border border-slate-200 flex flex-col min-h-0 relative">
+            <div class="p-3 border-b border-slate-100 flex items-center shrink-0">
+              <h2 id="title-graph-next-filtered" class="text-sm font-semibold text-slate-800">Graph t+1 (Explanation)</h2>
+            </div>
+            <div class="flex-1 relative w-full h-full min-h-0 p-2" id="graph-next-filtered-container">
+              <!-- D3 SVG will be injected here -->
+            </div>
+          </div>
+
+        </div>
+
+    </div>
+  </main>
+
+  <!-- Global Tooltip div used by D3 -->
+  <div id="d3-tooltip" class="tooltip"></div>
+
+  <script type="module" src="static/js/main.js?v=signed-metrics-5"></script>
+</body>
+
+</html>
